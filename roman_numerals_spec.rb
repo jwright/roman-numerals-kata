@@ -1,25 +1,15 @@
 require 'rspec'
 
 class RomanNumeral
-  def self.convert_to_stuff(number)
+  @@more  = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [50, 'L'], [40, 'XL'], [10, 'X'], [5, 'V'], [4, 'IV'], [1, 'I']]
+  def self.convert number
     roman = ""
-    if number < 4
-     roman += "I" * number
-    elsif number == 4
-     roman += "IV"
-    elsif number >= 5
-     roman += "V"
-     number -= 5
-     roman += "I" * number
+    @@more.each do |(a,b)|
+      blah = number / a
+      roman += b * blah
+      number -= blah * a
     end
     roman
-  end
-
-
-  def self.convert(number)
-    if number < 10
-      return convert_to_stuff(number)
-    end
   end
 end
 
@@ -32,7 +22,9 @@ describe "RomanNumeral" do
       4 => "IV",
       5 => "V",
       6 => "VI",
-      7 => "VII"
+      7 => "VII",
+      9 => "IX",
+      1978 => "MCMLXXVIII"
     }.each do |arabic, roman|
       it "converts #{arabic} to #{roman}" do
         expect(RomanNumeral.convert(arabic)).to eql roman
