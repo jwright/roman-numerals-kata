@@ -1,18 +1,5 @@
 require 'rspec'
-
-class RomanNumeral
-  @@conversions  = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]
-  def self.convert number
-    roman = ""
-    @@conversions.each do |(a,b)|
-      blah = number / a
-      roman += b * blah
-      number -= blah * a
-    end
-    roman
-  end
-end
-
+require_relative 'roman_numeral'
 
 describe "RomanNumeral" do
     {
@@ -24,9 +11,12 @@ describe "RomanNumeral" do
       6 => "VI",
       7 => "VII",
       9 => "IX",
+      37 => "XXXVII",
       90 => "XC",
+      99 => "XCIX",
       100 => "C",
-      1978 => "MCMLXXVIII"
+      1978 => "MCMLXXVIII",
+      3000 => "MMM"
     }.each do |arabic, roman|
       it "converts #{arabic} to #{roman}" do
         expect(RomanNumeral.convert(arabic)).to eql roman
