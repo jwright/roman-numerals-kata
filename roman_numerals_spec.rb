@@ -24,6 +24,8 @@ describe "RomanNumeral" do
       6 => "VI",
       7 => "VII",
       9 => "IX",
+      90 => "XC",
+      100 => "C",
       1978 => "MCMLXXVIII"
     }.each do |arabic, roman|
       it "converts #{arabic} to #{roman}" do
